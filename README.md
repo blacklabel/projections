@@ -6,8 +6,6 @@ The plugin gives user a chance for adding perspective points and connection line
 
 With Projections plugin scatter points are projected into three basic planes - XY, YZ and ZX. This is giving a chance for better visaulisation of connections between x,y and z variables.
 
-Go to project page to see this module in action: [http://blacklabel.github.io/indicators/](http://blacklabel.github.io/indicators/)
-
 
 ### Requirements
 
