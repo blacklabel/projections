@@ -1,0 +1,38 @@
+{
+	"name": "Projections",
+	"version": "1.0.0",
+	"title": "Projections",
+	"author": {
+		"name": "Black Label",
+		"url": "http://www.blacklabel.pl/"
+	},
+	"licenses": [{
+		"type": "Creative Commons Attribution (CC)",
+		"url": "https://github.com/blacklabel/projections/blob/master/license.txt"
+	}],
+	"dependencies": {
+		"highcharts": "5.0.3+"
+	},
+	"demo": [
+		"http://jsfiddle.net/BlackLabel/d9xyq8b8/"
+	],
+	"description": "Highcharts-3d plugin for showing scatter projections on XY, YZ and ZX planes.",
+	"keywords": [
+		"highcharts",
+		"highcharts-3d",
+		"projections",
+		"planeProjection",
+		"lineProjection",
+		"3D",
+		"scatter"
+	],
+	"maintainers": [{
+		"name": "Grzegorz Blachliński",
+		"email": "grzesiek@blacklabel.pl",
+		"url": "http://www.blacklabel.pl"
+	}],
+  "homepage": "http://blacklabel.github.io/projections/",        
+  "docs": "https://github.com/blacklabel/projections/",        
+  "bugs": "https://github.com/blacklabel/projections/issues",
+  "download": "https://github.com/blacklabel/projections/archive/master.zip"
+}

@@ -1,0 +1,36 @@
+{
+  "name": "highcharts-projections",
+  "version": "1.0.0",
+  "description": "Highcharts-3d plugin for showing scatter projections on XY, YZ and ZX planes.",
+  "main": "js/projections.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blacklabel/projections.git"
+  },
+  "keywords": [
+    "highcharts",
+    "highcharts-3d",
+    "projections",
+    "planeProjection",
+    "lineProjection",
+    "3D",
+    "scatter"
+  ],
+  "author": "Black Label <start@blacklabel.pl> (http://blacklabel.pl)",
+  "license": "SEE LICENSE IN license.txt",
+  "bugs": {
+    "url": "https://github.com/blacklabel/projections/issues"
+  },
+  "homepage": "https://github.com/blacklabel/projections#readme",
+  "files": [
+    "js/projections.js"
+  ],
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-jsdoc3": "^0.3.0",
+    "gulp-markdown": "^1.2.0",
+    "gulp-markdown-docs": "^0.1.5",
+    "markdown": "^0.5.0"
+  }
+}
