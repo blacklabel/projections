@@ -45,6 +45,32 @@
 			PlaneProjection.generatePlaneProjection(this);
 			LineProjection.generateLineProjection(this);
 		});
+
+		wrap(H.Point.prototype, 'setState', function (p, state) {
+			var point = this,
+				series = point.series,
+				lineProjectionOnHover = series.options.lineProjection.enabled === 'hover',
+				planeProjectionOnHover = series.options.planeProjection.enabled === 'hover',
+				planeOptions = merge({}, PlaneProjection.getDefaultOptions(), series.options.planeProjection),	// add default options
+				lineOptions = merge({}, LineProjection.getDefaultOptions(), series.options.lineProjection);
+			p.apply(point, [].slice.call(arguments, 1));
+			if (planeProjectionOnHover && state) {
+				PlaneProjection.generatePlaneProjectionForPoint(point, planeOptions);
+			} else if (planeProjectionOnHover) {
+				each(point.shadowPoints, function (sp) {
+					sp.destroy();
+					point.shadowPoints = null;
+				});
+			}
+
+			if (lineProjectionOnHover && state) {
+				LineProjection.generateLineProjectionForPoint(point, lineOptions);
+			} else if (lineProjectionOnHover) {
+				point.shadowLines.destroy();
+				point.shadowLines = null;
+			}
+
+		});
 	}
 	/**
 	* @description An object containing functions responsible for generating plane projections
@@ -80,32 +106,43 @@
 		 **/
 		generatePlaneProjection: function (series) {
 			var options = merge({}, PlaneProjection.getDefaultOptions(), series.options.planeProjection),	// add default options
-				enabled = options.enabled, // boolean if shadows should be generated or not
-				renderer = series.chart.renderer,
-				attrsShadowArr = [], // array containing attributes shadows in all three planes (XY, XZ and YZ respectively)
-				seriesGroup = series.group;
-			if (!enabled) {
+				enabled = options.enabled; // boolean if shadows should be generated or not
+			if (!(enabled === true)) {
 				return series;
 			}
 			each(series.points, function (point) {	// iterate over all series points, adding custom attributes related to every point etc.
-				attrsShadowArr = PlaneProjection.getOptionsForPoint(point, options);
-				if (!point.shadowPoints) {	// if shadowPoints array not exists yet, add this array. Inside are paths for shadows (with their attributes)
-					point.shadowPoints = [
-						renderer.path([]).attr(attrsShadowArr[0]).add(seriesGroup),
-						renderer.path([]).attr(attrsShadowArr[1]).add(seriesGroup),
-						renderer.path([]).attr(attrsShadowArr[2]).add(seriesGroup)
-					];
-				}
-				each(point.shadowPoints, function (sp, i) {
-					sp.attr({
-						zIndex: attrsShadowArr[i].zIndex	// updating zIndex for every path
-					});
-					sp.animate({
-						d: PlaneProjection.generateShadowPoint(point, options.radius, i)	// generate new path shape (animate is used because of a need for animation in 'live' charts)
-					});
-				});
+				PlaneProjection.generatePlaneProjectionForPoint(point, options);
 			});
 			return series;
+		},
+		/**
+		 * @description the main function responsible for generating plane projection for single point
+		 * @param {Object} point Highcharts point for which shadows are generated
+		 * @param {Object} options options used for generating shadows
+		 * @returns {Object} point
+		 * @memberof planeProjection
+		 **/
+		generatePlaneProjectionForPoint: function (point, options) {
+			var series = point.series,
+				renderer = series.chart.renderer,
+				seriesGroup = series.group,
+				attrsShadowArr = PlaneProjection.getOptionsForPoint(point, options);
+			if (!point.shadowPoints) {	// if shadowPoints array not exists yet, add this array. Inside are paths for shadows (with their attributes)
+				point.shadowPoints = [
+					renderer.path([]).attr(attrsShadowArr[0]).add(seriesGroup),
+					renderer.path([]).attr(attrsShadowArr[1]).add(seriesGroup),
+					renderer.path([]).attr(attrsShadowArr[2]).add(seriesGroup)
+				];
+			}
+			each(point.shadowPoints, function (sp, i) {
+				sp.attr({
+					zIndex: attrsShadowArr[i].zIndex	// updating zIndex for every path
+				});
+				sp.animate({
+					d: PlaneProjection.generateShadowPoint(point, options.radius, i)	// generate new path shape (animate is used because of a need for animation in 'live' charts)
+				});
+			});
+			return point;
 		},
 
 		/**
@@ -244,24 +281,36 @@
 		 * @memberof planeProjection
 		 **/
 		generateLineProjection: function (series) {
-			var chart = series.chart,
-				options = merge({}, LineProjection.getDefaultOptions(), series.options.lineProjection),
-				lineProjection = options.enabled, // boolean if line projections should be drawn or not
-				renderer = chart.renderer,
-				seriesGroup = series.group;
-			if (!lineProjection) {
+			var options = merge({}, LineProjection.getDefaultOptions(), series.options.lineProjection),
+				enabled = options.enabled; // boolean if line projections should be drawn or not
+			if (!(enabled === true)) {
 				return series;
 			}
 			each(series.points, function (point) {
-				options.stroke = options.colorByPoint ? point.color : options.stroke;	// stroke for each lineProjections group
-				if (!point.shadowLines) {
-					point.shadowLines = renderer.path([]).attr(options).add(seriesGroup);	// added group - fixing not hiding lineProjection bug
-				}
-				point.shadowLines.animate({
-					d: LineProjection.getLinePath(point)
-				});
+				LineProjection.generateLineProjectionForPoint(point, options);
 			});
 			return series;
+		},
+		/**
+		 * @description the main function responsible for generating line projection for single point
+		 * @param {Object} point Highcharts point for which lines are generated
+		 * @param {Object} options options used for generating shadows
+		 * @returns {Object} point
+		 * @memberof planeProjection
+		 **/
+		generateLineProjectionForPoint: function (point, options) {
+			var series = point.series,
+				chart = series.chart,
+				renderer = chart.renderer,
+				seriesGroup = series.group;
+			options.stroke = options.colorByPoint ? point.color : options.stroke;	// stroke for each lineProjections group
+			if (!point.shadowLines) {
+				point.shadowLines = renderer.path([]).attr(options).add(seriesGroup);	// added group - fixing not hiding lineProjection bug
+			}
+			point.shadowLines.animate({
+				d: LineProjection.getLinePath(point)
+			});
+			return point;
 		},
 		/**
 		 * @description function responsible for generating line projections for a single point
