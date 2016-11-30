@@ -1,6 +1,6 @@
 {
 	"name": "Projections",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"title": "Projections",
 	"author": {
 		"name": "Black Label",
@@ -11,7 +11,8 @@
 		"url": "https://github.com/blacklabel/projections/blob/master/license.txt"
 	}],
 	"dependencies": {
-		"highcharts": "5.0.3+"
+		"highcharts": "5.0.3+",
+		"highcharts-3d": "5.0.3+"
 	},
 	"demo": [
 		"http://jsfiddle.net/BlackLabel/d9xyq8b8/"

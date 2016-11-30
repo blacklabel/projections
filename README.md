@@ -9,7 +9,8 @@ With Projections plugin scatter points are projected into three basic planes - X
 
 ### Requirements
 
-* Plugin requires latest Highstock (5.0.3+)
+* Plugin requires latest Highcharts (5.0.3+)
+* Plugin requires latest Highcharts 3D module (5.0.3+)
 
 ### Versions
 
@@ -17,7 +18,7 @@ With Projections plugin scatter points are projected into three basic planes - X
 
 ### Installation
 
-* Like any other Highcharts module (e.g. exporting), add `<script>` tag pointing to `indicators.js` below Highcharts script tag.
+* Like any other Highcharts module (e.g. exporting), add `<script>` tag pointing to `projections.js` below Highcharts script tag.
 
 * For NPM users:
 ```

@@ -1,5 +1,5 @@
 /**
-* Shadow Projection v1.0.0 (2016-09-19)
+* Shadow Projection v1.0.1 (2016-11-30)
 *
 * (c) 2012-2016 Black Label
 *
@@ -34,7 +34,8 @@
 		Y = 'y',
 		Z = 'z',
 		MIN = 'min',
-		MAX = 'max';
+		MAX = 'max',
+		HOVER = 'hover';
 
 /**
 * WRAPPED FUNCTIONS
@@ -49,10 +50,12 @@
 		wrap(H.Point.prototype, 'setState', function (p, state) {
 			var point = this,
 				series = point.series,
-				lineProjectionOnHover = series.options.lineProjection.enabled === 'hover',
-				planeProjectionOnHover = series.options.planeProjection.enabled === 'hover',
-				planeOptions = merge({}, PlaneProjection.getDefaultOptions(), series.options.planeProjection),	// add default options
-				lineOptions = merge({}, LineProjection.getDefaultOptions(), series.options.lineProjection);
+				lineProjection = series.options.lineProjection,
+				planeProjection = series.options.planeProjection,
+				lineProjectionOnHover = lineProjection.enabled === HOVER,
+				planeProjectionOnHover = planeProjection.enabled === HOVER,
+				planeOptions = merge({}, PlaneProjection.getDefaultOptions(), planeProjection),	// default plane options
+				lineOptions = merge({}, LineProjection.getDefaultOptions(), lineProjection); // default line options
 			p.apply(point, [].slice.call(arguments, 1));
 			if (planeProjectionOnHover && state) {
 				PlaneProjection.generatePlaneProjectionForPoint(point, planeOptions);
@@ -62,7 +65,6 @@
 					point.shadowPoints = null;
 				});
 			}
-
 			if (lineProjectionOnHover && state) {
 				LineProjection.generateLineProjectionForPoint(point, lineOptions);
 			} else if (lineProjectionOnHover) {
@@ -91,7 +93,7 @@
 		 **/
 		getDefaultOptions: function () {
 			return {
-				enabled: true,
+				enabled: true, // possible values: true, false, 'hover'
 				fill: 'rgba(50,50,50,0.8)',
 				byPoint: false, // boolean - check if color and radius is by point or by global options
 				radius: 8,
@@ -105,12 +107,12 @@
 		 * @memberof planeProjection
 		 **/
 		generatePlaneProjection: function (series) {
-			var options = merge({}, PlaneProjection.getDefaultOptions(), series.options.planeProjection),	// add default options
-				enabled = options.enabled; // boolean if shadows should be generated or not
+			var options = merge({}, PlaneProjection.getDefaultOptions(), series.options.planeProjection),	// default options
+				enabled = options.enabled; // information if shadows should be generated or not (possible values - true, false, 'hover')
 			if (!(enabled === true)) {
-				return series;
+				return series;	// if enabled is set to false or 'hover' we are not adding planes in this function.
 			}
-			each(series.points, function (point) {	// iterate over all series points, adding custom attributes related to every point etc.
+			each(series.points, function (point) {
 				PlaneProjection.generatePlaneProjectionForPoint(point, options);
 			});
 			return series;
@@ -127,7 +129,7 @@
 				renderer = series.chart.renderer,
 				seriesGroup = series.group,
 				attrsShadowArr = PlaneProjection.getOptionsForPoint(point, options);
-			if (!point.shadowPoints) {	// if shadowPoints array not exists yet, add this array. Inside are paths for shadows (with their attributes)
+			if (!point.shadowPoints) {	// if shadowPoints array not exists yet, add this array. Inside shadowPoints are paths for shadows (with their attributes)
 				point.shadowPoints = [
 					renderer.path([]).attr(attrsShadowArr[0]).add(seriesGroup),
 					renderer.path([]).attr(attrsShadowArr[1]).add(seriesGroup),
@@ -158,17 +160,17 @@
 				path,
 				cos = Math.cos,
 				sin = Math.sin,
-				numberOfPointsForOneShadow = 2 * r, // number of points for used to draw single shadow path so shadow looks like circle not a polygon - looks to be related to r
-				alpha = 2 * Math.PI / numberOfPointsForOneShadow, // path looks like circle where point is drawn every alpha degrees (until whole 2*PI degrees is made)
+				numberOfPointsForOneShadow = 2 * r, // number of points used to draw single shadow path so shadow looks like circle not a polygon
+				alpha = 2 * Math.PI / numberOfPointsForOneShadow, // point is drawn every alpha degrees (until whole 2*PI degrees is made)
 				xAxis = series.xAxis,
 				yAxis = series.yAxis,
 				zAxis = series.zAxis,
 				radius = {
-					x: xAxis.toValue(r) - xAxis.toValue(0), // radius calculated in xAxis values - made because axes may have different ranges in pixels for the same radius
+					x: xAxis.toValue(r) - xAxis.toValue(0), // radius calculated in xAxis values - axes may have different ranges in pixels for the same radius
 					y: yAxis.toValue(r) - yAxis.toValue(0), // radius calculated in yAxis values
 					z: zAxis.toValue(r) - zAxis.toValue(0) // radius calculated in zAxis values
 				},
-				shadowPoints = [], // array of shadow points containing point objects with x,y and z values used for drawing circle path
+				shadowPoints = [], // array containing points objects with x,y and z values used for drawing circle path
 				perspectivePoints,
 				currentAxis,
 				currentAxisPlanner,
@@ -221,8 +223,8 @@
 			return path;
 		},
 		getOptionsForPoint: function (point, options) {
-			var accuracy = 1000000,
-				optionsArr; // the smallest resolution between points giving a change to recognize them
+			var accuracy = 1000000,	// the smallest resolution between points giving a change to recognize them
+				optionsArr;
 			if (options.byPoint) {
 				options.fill = point.color;
 				options.radius = point.graphic.r || point.graphic.radius;
@@ -282,7 +284,7 @@
 		 **/
 		generateLineProjection: function (series) {
 			var options = merge({}, LineProjection.getDefaultOptions(), series.options.lineProjection),
-				enabled = options.enabled; // boolean if line projections should be drawn or not
+				enabled = options.enabled; // information if line projections should be drawn or not (possible values - true, false, 'hover')
 			if (!(enabled === true)) {
 				return series;
 			}
@@ -305,7 +307,7 @@
 				seriesGroup = series.group;
 			options.stroke = options.colorByPoint ? point.color : options.stroke;	// stroke for each lineProjections group
 			if (!point.shadowLines) {
-				point.shadowLines = renderer.path([]).attr(options).add(seriesGroup);	// added group - fixing not hiding lineProjection bug
+				point.shadowLines = renderer.path(LineProjection.getLinePath(point)).attr(options).add(seriesGroup);
 			}
 			point.shadowLines.animate({
 				d: LineProjection.getLinePath(point)
