@@ -52,8 +52,8 @@
 				series = point.series,
 				lineProjection = series.options.lineProjection,
 				planeProjection = series.options.planeProjection,
-				lineProjectionOnHover = lineProjection.enabled === HOVER,
-				planeProjectionOnHover = planeProjection.enabled === HOVER,
+				lineProjectionOnHover = lineProjection && lineProjection.enabled === HOVER,
+				planeProjectionOnHover = planeProjection && planeProjection.enabled === HOVER,
 				planeOptions = merge({}, PlaneProjection.getDefaultOptions(), planeProjection),	// default plane options
 				lineOptions = merge({}, LineProjection.getDefaultOptions(), lineProjection); // default line options
 			p.apply(point, [].slice.call(arguments, 1));
@@ -271,7 +271,7 @@
 				'stroke-width': 1,
 				dashstyle: 'dash',
 				zIndex: 2,
-				stroke: 'white',
+				stroke: 'red',
 				colorByPoint: false
 			};
 		},

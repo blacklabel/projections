@@ -86,7 +86,7 @@ $(function () {
 				byPoint: true
 			},
 			lineProjection: {
-				enabled: true,
+				enabled: 'hover',
 				colorByPoint: true
 			},
 			marker: {
