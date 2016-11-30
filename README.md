@@ -9,7 +9,12 @@ With Projections plugin scatter points are projected into three basic planes - X
 
 ### Requirements
 
+<<<<<<< HEAD
 * Plugin requires latest Highstock (5.0.3+)
+=======
+* Plugin requires latest Highcharts (5.0.3+)
+* Plugin requires latest Highcharts 3D module (5.0.3+)
+>>>>>>> dev
 
 ### Versions
 
@@ -17,7 +22,11 @@ With Projections plugin scatter points are projected into three basic planes - X
 
 ### Installation
 
+<<<<<<< HEAD
 * Like any other Highcharts module (e.g. exporting), add `<script>` tag pointing to `indicators.js` below Highcharts script tag.
+=======
+* Like any other Highcharts module (e.g. exporting), add `<script>` tag pointing to `projections.js` below Highcharts script tag.
+>>>>>>> dev
 
 * For NPM users:
 ```
@@ -78,14 +87,22 @@ The latest code is available on github: [https://github.com/blacklabel/projectio
   </thead>
   <tbody>
     <tr><td>planeProjection</td></tr>
+<<<<<<< HEAD
     <tr><td align="left">enabled</td><td>Boolean</td><td align="left">Information if projections should be enabled</td></tr>
+=======
+    <tr><td align="left">enabled</td><td>Boolean/String</td><td align="left">Information if projections should be enabled, disabled or enabled on hover</td></tr>
+>>>>>>> dev
     <tr><td align="left">fill</td><td>String</td><td align="left">Fill color of projections</td></tr>
     <tr><td align="left">byPoint</td><td>Boolean</td><td align="left">Information if radius and color should be taken from point or global options</td></tr>
     <tr><td align="left">radius</td><td>Number</td><td align="left">Projections radius</td></tr>
     <tr><td align="left">stroke-width</td><td>Number</td><td align="left">The width of stroke in projections</td></tr>
 
     <tr><td>lineProjection</td></tr>
+<<<<<<< HEAD
     <tr><td align="left">enabled</td><td>Boolean</td><td align="left">Information if projections should be enabled</td></tr>
+=======
+    <tr><td align="left">enabled</td><td>Boolean/String</td><td align="left">Information if projections should be enabled, disabled or enabled on hover</td></tr>
+>>>>>>> dev
     <tr><td align="left">dashstyle</td><td>String</td><td align="left">Dash style of line projection</td></tr>
     <tr><td align="left">zIndex</td><td>Number</td><td align="left">z-index of line projection</td></tr>
     <tr><td align="left">stroke</td><td>String</td><td align="left">Color of projections line</td></tr>

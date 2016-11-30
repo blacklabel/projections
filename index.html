@@ -1,13 +1,43 @@
+<<<<<<< HEAD
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
+=======
+<!doctype html>
+<html>
+<head>
+<title>Projections - Highcharts module</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.src.js"></script>
+<script src="http://code.highcharts.com/highcharts-3d.src.js"></script>
+<script src = "./js/projections.js"></script>
+<script src = "./js/demo.js"></script>
+
+
+</head>
+<body>
+
+<div id = "container"></div>
+
+<!-- inject:body:html -->
+>>>>>>> dev
 <h1 id="projections-highcharts-3d-module">Projections - Highcharts-3D module</h1>
 <p>The plugin gives user a chance for adding perspective points and connection lines for scatter series in 3D. </p>
 <p>With Projections plugin scatter points are projected into three basic planes - XY, YZ and ZX. This is giving a chance for better visaulisation of connections between x,y and z variables.</p>
 <h3 id="requirements">Requirements</h3>
 <ul>
+<<<<<<< HEAD
 <li>Plugin requires latest Highstock (5.0.3+)</li>
+=======
+<li>Plugin requires latest Highcharts (5.0.3+)</li>
+<li>Plugin requires latest Highcharts 3D module (5.0.3+)</li>
+>>>>>>> dev
 </ul>
 <h3 id="versions">Versions</h3>
 <ul>
@@ -15,7 +45,11 @@
 </ul>
 <h3 id="installation">Installation</h3>
 <ul>
+<<<<<<< HEAD
 <li><p>Like any other Highcharts module (e.g. exporting), add <code>&lt;script&gt;</code> tag pointing to <code>indicators.js</code> below Highcharts script tag.</p>
+=======
+<li><p>Like any other Highcharts module (e.g. exporting), add <code>&lt;script&gt;</code> tag pointing to <code>projections.js</code> below Highcharts script tag.</p>
+>>>>>>> dev
 </li>
 <li><p>For NPM users:</p>
 <pre><code>var Highcharts = require(&#39;highcharts&#39;);
@@ -67,14 +101,22 @@
   </thead>
   <tbody>
     <tr><td>planeProjection</td></tr>
+<<<<<<< HEAD
     <tr><td align="left">enabled</td><td>Boolean</td><td align="left">Information if projections should be enabled</td></tr>
+=======
+    <tr><td align="left">enabled</td><td>Boolean/String</td><td align="left">Information if projections should be enabled, disabled or enabled on hover</td></tr>
+>>>>>>> dev
     <tr><td align="left">fill</td><td>String</td><td align="left">Fill color of projections</td></tr>
     <tr><td align="left">byPoint</td><td>Boolean</td><td align="left">Information if radius and color should be taken from point or global options</td></tr>
     <tr><td align="left">radius</td><td>Number</td><td align="left">Projections radius</td></tr>
     <tr><td align="left">stroke-width</td><td>Number</td><td align="left">The width of stroke in projections</td></tr>
 
     <tr><td>lineProjection</td></tr>
+<<<<<<< HEAD
     <tr><td align="left">enabled</td><td>Boolean</td><td align="left">Information if projections should be enabled</td></tr>
+=======
+    <tr><td align="left">enabled</td><td>Boolean/String</td><td align="left">Information if projections should be enabled, disabled or enabled on hover</td></tr>
+>>>>>>> dev
     <tr><td align="left">dashstyle</td><td>String</td><td align="left">Dash style of line projection</td></tr>
     <tr><td align="left">zIndex</td><td>Number</td><td align="left">z-index of line projection</td></tr>
     <tr><td align="left">stroke</td><td>String</td><td align="left">Color of projections line</td></tr>
@@ -83,4 +125,11 @@
 </table>
 
 
+<<<<<<< HEAD
+=======
+
+<!-- endinject -->
+
+</body>
+>>>>>>> dev
 </html>
