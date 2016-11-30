@@ -1,10 +1,6 @@
 {
   "name": "highcharts-projections",
-<<<<<<< HEAD
-  "version": "1.0.0",
-=======
   "version": "1.0.1",
->>>>>>> dev
   "homepage": "http://blacklabel.github.io/projections/",
   "authors": [
     "Grzegorz Blachliński <grzesiek@blacklabel.pl>"
