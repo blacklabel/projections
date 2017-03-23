@@ -15,7 +15,7 @@
 		"highcharts-3d": "5.0.3+"
 	},
 	"demo": [
-		"http://jsfiddle.net/BlackLabel/d9xyq8b8/"
+		"https://jsfiddle.net/BlackLabel/d9xyq8b8/"
 	],
 	"description": "Highcharts-3d plugin for showing scatter projections on XY, YZ and ZX planes.",
 	"keywords": [
