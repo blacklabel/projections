@@ -1,5 +1,5 @@
 /**
-* Shadow Projection v1.0.1 (2016-11-30)
+* Shadow Projection v1.0.2 (2017-06-09)
 *
 * (c) 2012-2016 Black Label
 *
@@ -43,8 +43,10 @@
 	if (H.seriesTypes.scatter) {
 		wrap(H.seriesTypes.scatter.prototype, 'drawPoints', function (p) {
 			p.apply(this, [].slice.call(arguments, 1));
-			PlaneProjection.generatePlaneProjection(this);
-			LineProjection.generateLineProjection(this);
+			if (this.chart.is3d()) { // #1 allow projections only on 3d charts.
+				PlaneProjection.generatePlaneProjection(this);
+				LineProjection.generateLineProjection(this);
+			}
 		});
 
 		wrap(H.Point.prototype, 'setState', function (p, state) {
@@ -218,8 +220,8 @@
 				perspectivePoints[0].plotY
 			];
 			for (var i = 0; i < perspectivePoints.length - 1; i++) {
-				path = path.concat(getPointSpline.call(null, perspectivePoints, perspectivePoints[i + 1], i + 1));	// getPointSpline is used to get curved edges for circle
-			}
+				path = path.concat(getPointSpline.call({chart: {polar: false}}, perspectivePoints, perspectivePoints[i + 1], i + 1));	// getPointSpline is used to get curved edges for circle
+			} // #1 added chart.polar: false for getPointSpline method in highcharts-more.
 			return path;
 		},
 		getOptionsForPoint: function (point, options) {
