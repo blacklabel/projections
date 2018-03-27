@@ -1,5 +1,5 @@
 /**
-* Shadow Projection v1.0.2 (2017-06-09)
+* Shadow Projection v1.0.3 (2018-03-27)
 *
 * (c) 2012-2016 Black Label
 *

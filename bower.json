@@ -1,6 +1,6 @@
 {
   "name": "Projections",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "http://blacklabel.github.io/projections/",
   "authors": [
     "Grzegorz Blachliński <grzesiek@blacklabel.pl>"
@@ -14,7 +14,8 @@
     "planeProjection",
     "lineProjection",
     "3D",
-    "scatter"
+    "scatter",
+    "highcharts-addon"
   ],
   "license": "Creative Commons Attribution (CC)",
   "ignore": [
