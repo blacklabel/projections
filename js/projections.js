@@ -20,6 +20,7 @@
 		factory(Highcharts);
 	}
 }(function (H) {
+	H.perspective = H._modules['Core/Math3D.js'].perspective;
 
 	var PlaneProjection,
 		LineProjection,
