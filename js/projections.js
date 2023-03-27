@@ -20,10 +20,7 @@
 		factory(Highcharts);
 	}
 }(function (H) {
-	H.perspective = H._modules['Core/Math3D.js'].perspective;
-
-	var PlaneProjection,
-		LineProjection,
+	const perspective = H._modules['Core/Math3D.js'].perspective,
 		each = H.each,
 		wrap = H.wrap,
 		merge = H.merge,
@@ -37,6 +34,9 @@
 		MIN = 'min',
 		MAX = 'max',
 		HOVER = 'hover';
+	
+	var PlaneProjection,
+		LineProjection;
 
 /**
 * WRAPPED FUNCTIONS
@@ -198,7 +198,7 @@
 				shadow[planer[2]] = series[currentAxis].toPixels(currentAxisPlanner, true);
 				shadowPoints.push(shadow);
 			}
-			perspectivePoints = H.perspective(shadowPoints, series.chart, true); // using perspective on points in one plane (XY, XZ or YZ)
+			perspectivePoints = perspective(shadowPoints, series.chart, true); // using perspective on points in one plane (XY, XZ or YZ)
 			path = PlaneProjection.getShadowPath(perspectivePoints, series.chart); // calculate the path for final points
 			return path;
 		},
@@ -334,7 +334,7 @@
 				i,	// index of drawn line
 				perspectivePoints,
 				plotZ = series.zAxis.translate(point.z);
-			perspectivePoints = H.perspective([{
+			perspectivePoints = perspective([{
 				x: point.plotXold,
 				y: point.plotYold,
 				z: zAxis.translate(zAxis.max)
