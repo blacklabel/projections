@@ -20,7 +20,9 @@
 		factory(Highcharts);
 	}
 }(function (H) {
-	const perspective = H._modules['Core/Math3D.js'].perspective,
+	var perspective = H._modules['Core/Math3D.js'].perspective,
+		PlaneProjection,
+		LineProjection,
 		each = H.each,
 		wrap = H.wrap,
 		merge = H.merge,
@@ -34,9 +36,6 @@
 		MIN = 'min',
 		MAX = 'max',
 		HOVER = 'hover';
-	
-	var PlaneProjection,
-		LineProjection;
 
 /**
 * WRAPPED FUNCTIONS
