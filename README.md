@@ -69,29 +69,20 @@ The latest code is available on github: [https://github.com/blacklabel/projectio
 ```
 
 ### Parameters
-<table>
-  <thead>
-    <tr>
-      <th align="left">Property</th>
-      <th align="left">Type</th>
-      <th align="left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>planeProjection</td></tr>
-    <tr><td align="left">enabled</td><td>Boolean/String</td><td align="left">Information if projections should be enabled, disabled or enabled on hover</td></tr>
-    <tr><td align="left">fill</td><td>String</td><td align="left">Fill color of projections</td></tr>
-    <tr><td align="left">byPoint</td><td>Boolean</td><td align="left">Information if radius and color should be taken from point or global options</td></tr>
-    <tr><td align="left">radius</td><td>Number</td><td align="left">Projections radius</td></tr>
-    <tr><td align="left">stroke-width</td><td>Number</td><td align="left">The width of stroke in projections</td></tr>
-
-    <tr><td>lineProjection</td></tr>
-    <tr><td align="left">enabled</td><td>Boolean/String</td><td align="left">Information if projections should be enabled, disabled or enabled on hover</td></tr>
-    <tr><td align="left">dashstyle</td><td>String</td><td align="left">Dash style of line projection</td></tr>
-    <tr><td align="left">zIndex</td><td>Number</td><td align="left">z-index of line projection</td></tr>
-    <tr><td align="left">stroke</td><td>String</td><td align="left">Color of projections line</td></tr>
-    <tr><td align="left">stroke-width</td><td>Number</td><td align="left">The width of stroke in line projections</td></tr>
-  </tbody>
-</table>
-
+| Property | Type | Ddescription |
+| --- | --- | --- |
+| | | |
+| planeProjection | | |
+| enabled | Boolean | Information if projections should be enabled, disabled or enabled on hover |
+| fill | String | Fill color of projections |
+| byPoint | Boolean | Information if radius and color should be taken from point or global options |
+| radius | Number | Projections radius |
+| stroke-width | Number | The width of stroke in projections |
+| | | |
+| lineProjection | | |
+| enabled | Boolean | Information if projections should be enabled, disabled or enabled on hover |
+| dashstyle | String | Dash style of line projection |
+| zIndex | Number | z-index of line projection |
+| stroke | String | Color of projections line |
+| stroke-width | Number | The width of stroke in line projections |
 
